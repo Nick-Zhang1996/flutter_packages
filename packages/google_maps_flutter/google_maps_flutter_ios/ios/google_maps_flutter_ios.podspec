@@ -23,13 +23,16 @@ Downloaded by pub (not CocoaPods).
   # in https://github.com/flutter/flutter/issues/86820 for why this is so broad.
   s.dependency 'GoogleMaps', '< 9.0'
   s.static_framework = true
-  s.platform = :ios, '12.0'
+  s.platform = :ios, '13.0'
+
   # GoogleMaps 6.x does not support arm64 simulators, but also doesn't declare
   # explicitly that it doesn't, so mark that here so that the Flutter tool knows
   # to build the Runner for x86_64 instead. See https://github.com/flutter/flutter/issues/94491
   # TODO(stuartmorgan): Remove EXCLUDED_ARCHS once this plugin requires iOS 13+,
   # at which point Cocoapods will resolve to a version of GoogleMaps that has
   # arm64 support.
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+
+  # Nick @ LapSmart, we use arm64 in dev and have no need to support ios12, overriding this
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES'}
   s.resource_bundles = {'google_maps_flutter_ios_privacy' => ['Resources/PrivacyInfo.xcprivacy']}
 end
